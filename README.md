@@ -2,7 +2,7 @@
 
 **LIBRERÍAS REQUERIDAS**: OpenCV
 
-  Para instalar OpenCV a traves de la terminal: py -m pip install opencv-python
+  - Para instalar OpenCV a traves de la terminal: py -m pip install opencv-python
 
 **PREPROCESAMIENTO Y SEGMENTACIÓN**
 
