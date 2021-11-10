@@ -2,8 +2,6 @@ import os
 import torch
 from torch.utils.data import Dataset
 import pandas as pd
-from PIL import Image
-import matplotlib.pyplot as plt
 import cv2
 
 class CaracterDataset(Dataset):

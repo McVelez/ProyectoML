@@ -1,4 +1,3 @@
-from torchsummary import summary
 from torch import nn
 
 class CNNNetwork(nn.Module):
