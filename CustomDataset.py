@@ -7,13 +7,15 @@ import cv2
 class CaracterDataset(Dataset):
 
     # Inicializacion de variables
-    def __init__(self, annotations_file, image_dir, device):
+    def __init__(self, annotations_file, image_dir, device, individual=True):
         # Variable que contiene la metadata e información relevante para cada archivo de imagen preprocesado y segmentado
         self.annotations = pd.read_csv(annotations_file) 
         # Directorio en donde se tienen todas las carpetas e imagenes segmentadas y preprocesadas
         self.image_dir = image_dir 
         # Dispositivo por ser asignado en caso de tener CUDA disponible
-        self.device = device 
+        self.device = device
+        # Variable para determinar si se esta utilizando solamente los archivos individuales o como conjuntos
+        self.individual = individual
 
     # Para identificar la cantidad de archivos en el dataset
     def __len__(self):
@@ -49,7 +51,12 @@ class CaracterDataset(Dataset):
     # Funcion para obtener la direccion completa de cada imagen
     def _get_image_sample_path(self, index):
         # Obtener la direccion del folder y del archivo en base a la informacion almacenada en el archivo csv
-        fold = f"fold{self.annotations.iloc[index, 2]}" 
+        if self.individual:
+            fold = f"fold{self.annotations.iloc[index, 2]}" 
+        else:
+            # En caso de usar el CAPTCHA_VALIDACION por ejemplo (en donde es necesario considerar conjuntos de archivos)
+            fold = self.annotations.iloc[index, 2]
+        
         filename = self.annotations.iloc[index, 3]
 
         # Unir los paths del folder y del nombre del archivo para obtener la dirección completa, para asi poder acceder adecuadamente a todos los archivos almacenados
@@ -61,8 +68,10 @@ class CaracterDataset(Dataset):
     # Funcion para obtener la etiqueta correspondiente a cada archivo de imagen
     def _get_image_sample_label(self, index):
         # Obtener y regresar la etiqueta correspondiente en funcion del archivo csv que contiene la metadata e informacion necesaria
-        return self.annotations.iloc[index, 2] # labels = [0 = 0, 1=1, ..., 10 = a, ..., 61 = Z]
-
+        if self.individual:
+            return self.annotations.iloc[index, 2] # labels = [0 = 0, 1=1, ..., 10 = a, ..., 61 = Z]
+        else:
+            return self.annotations.iloc[index, 4]
 
 # Prueba para identificar que las funciones descritas funcionen correctamente
 if __name__ == "__main__":
