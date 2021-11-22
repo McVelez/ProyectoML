@@ -19,5 +19,8 @@ Se necesita la carpeta con el siguiente nombre para poder realizar un entrenamie
 
 Se necesita la carpeta con el siguiente nombre para poder calcular adecuadamente la eficiencia del modelo el cual será utilizado junto con el archivo de _Caracteres_validacion_Metadata.csv_ para realizar las predicciones en base al modelo entrenado en función del archivo _Predictions.py_.
   - _CARACTERES_VALIDACION_ (8000 imágenes de validación. Link de drive: https://drive.google.com/file/d/1XNAWjAN9IzZsYl-RaM9YrqqCTiTC7cnj/view?usp=sharing)
+
+En caso de utilizar la validación de los captchas completos y no de los caracteres es necesario utilizar el archivo de _Captchas_validacion_Metadata.csv_ junto con la siguiente carpeta:
+  - _CAPTCHAS_VALIDACION_ (800 folders de validación. Link de drive: https://drive.google.com/file/d/1mTHJm5cQeiXnF1JkJIofnjcYWk-cC_R9/view?usp=sharing)
     
   
